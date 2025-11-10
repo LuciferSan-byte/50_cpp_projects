@@ -8,6 +8,7 @@ std::unordered_set<int> valid = {0,1,2};
 int decizie, scoreP = 0, scoreC = 0, k;
 void joc();
 void meniu();
+void clearscreen()  { std::cout << "\033[2J\033[1;1H"; }
 int core(int decizie, int Calc_choice) {
 
     if(!valid.count(decizie)){
@@ -23,7 +24,7 @@ int core(int decizie, int Calc_choice) {
   return joc[decizie][Calc_choice];
 }
 
-void re(bool rematch) {
+void remiza(bool rematch) {
   if (rematch) {
     scoreP = 0;
     scoreC = 0;
@@ -37,20 +38,20 @@ std::string alegere_calc(int Calc_choice) {
   return comp[Calc_choice];
 }
 
-void v_p_d(int Final, int Calc_choice, int &scoreP, int &scoreC) {
+void decizie_win_lose_draw(int Final, int Calc_choice, int &scoreP, int &scoreC) {
   if (Final == 1) {
     std::cout << "Calculatorul a Ales " << alegere_calc(Calc_choice) << "\n";
     std::cout << "Ai Castigat\n";
     scoreP++;
     std::this_thread::sleep_for(std::chrono::milliseconds(1200));
-    system("clear");
+    clearscreen();;
     meniu();
   }
   if (Final == 0) {
     std::cout << "Calculatorul a Ales " << alegere_calc(Calc_choice) << "\n";
     std::cout << "Egalitate\n";
      std::this_thread::sleep_for(std::chrono::milliseconds(1200));
-    system("clear");
+    clearscreen();
     meniu();
   }
   if (Final == -1) {
@@ -58,7 +59,7 @@ void v_p_d(int Final, int Calc_choice, int &scoreP, int &scoreC) {
     std::cout << "Ai Pierdut\n";
     scoreC++;
      std::this_thread::sleep_for(std::chrono::milliseconds(1200));
-    system("clear");
+    clearscreen();
     meniu();
   }
 }
@@ -66,21 +67,21 @@ void v_p_d(int Final, int Calc_choice, int &scoreP, int &scoreC) {
 void score(int scoreP, int scoreC, int k) {
   bool rematch;
   std::cout << "========= Scor ==========\n"
-            << "Player:\t" << scoreP << " | | | " << "Calculator: " << scoreC;
-  if ((scoreP >= k / 2 + 1 && scoreC <= k / 2 - 1 )|| scoreP == k) {
-    system("clear");
-    std::cout << "\nAi Castigat\n"
-              << "\nScor final\n"
-              << "Player:   " << scoreP << " | | | "
-              << "Calculator:  " << scoreC;
+            << "Player: " << scoreP << " | | | " << "Calculator: " << scoreC;
+  if ( scoreP == k) {
+    clearscreen();
+    std::cout << "Ai Castigat\n"
+              << "Scor final\n"
+              << "Player: " << scoreP << " | | | "
+              << "Calculator: " << scoreC;
     std::this_thread::sleep_for(std::chrono::milliseconds(300));
     std::cout << "\nDoriti sa mai jucati ?[1][0]: ";
     std::cin >> rematch;
-    re(rematch);
+    remiza(rematch);
     exit(1);
   }
-  if ((scoreP <= k / 2 - 1 && scoreC >= k / 2 + 1) || scoreC == k) {
-    system("clear");
+  if (scoreC == k) {
+    clearscreen();
     std::cout << "\nAi Pierdut \n"
               << "Scor final\n"
               << "Player:   " << scoreP << " | | | "
@@ -88,7 +89,7 @@ void score(int scoreP, int scoreC, int k) {
     std::this_thread::sleep_for(std::chrono::milliseconds(300));
     std::cout << "\nDoriti remiza ?[1][0]: ";
     std::cin >> rematch;
-    re(rematch); 
+    remiza(rematch); 
     exit(1);
   }
 }
@@ -103,17 +104,17 @@ void meniu() {
   std::uniform_int_distribution<int> dist(0, 2);
   int Calc_choice = dist(gen);
   int Final = core(decizie, Calc_choice);
-  v_p_d(Final, Calc_choice, scoreP, scoreC);
+  decizie_win_lose_draw(Final, Calc_choice, scoreP, scoreC);
 }
 void joc() {
   std::cout << "---Buna Ziua---\n";
   std::cout << "Pana la ce scor doriti sa jucati: ";
   std::cin >> k;
-  system("clear");
+  clearscreen();
   meniu();
 }
 int main() {
-    system("clear");
+    clearscreen();
     joc(); }
 
 
