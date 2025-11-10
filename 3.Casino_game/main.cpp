@@ -27,7 +27,7 @@ private:
   }
   int getCurrScore() { return current_score; }
   int getMaxScore() { return (final_score * difficulty); }
-  bool DecideWin(int Player, int Computer)const{ return  Player == Computer  ; }
+  bool DecideWin(int Player, int Computer)const{ return  Player == Computer;}
 
   void roundResult(int PlayerChoice , int ComputerChoice){
     std::cout << "Calculatorul a ales: " << ComputerChoice << "\n";
@@ -44,7 +44,7 @@ private:
 
   void display_Score()  {
     std::cout << "========= Scor ==========\n";
-    std::cout << "           " << current_score << "/" << final_score*difficulty << "\n";
+    std::cout << "          " << current_score << "/" << final_score*difficulty << "\n";
   }
   bool isGameOver() {
 	if(incercari == 0 && current_score >= (final_score * difficulty)/2) return !last_stand();	
@@ -58,13 +58,13 @@ private:
 
   void endgame(){ 
 	std::cout << "\n===== Joc terminat =====\n"; 
-	std::cout << "Ai Ghicit " << current_score << " din " << final_score << " numere\n";
+	std::cout << "Ai Ghicit " << current_score << " din " << final_score*difficulty << " numere\n";
 	if(current_score == final_score){
 	    std::cout << "Ai castigat " << prize*difficulty  << "$\n";
 	}else std::cout << "Ai castigat multa muie\n";
 	
 	bool rematch;
-	std::cout << "Doriti sa va mai incercati norocul inca o data? [1 = Da / 2 = Nu]"; std::cin>>rematch;
+	std::cout << "Doriti sa va mai incercati norocul inca o data? [1 = Da / 0 = Nu]"; std::cin>>rematch;
 	if(rematch)
 	    restart();
 	else
