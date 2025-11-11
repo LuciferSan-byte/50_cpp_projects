@@ -11,6 +11,11 @@ Calc::Calc(){
     };
 }
 void Calc::runActions(size_t index){
+    if(!isdigit(index)){
+	std::cout << "D asta ai nevoie si de calculator";
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	return;}
     if(index < 1 || index > actions.size()){
 	std::cout << "Index invalid";
 	return;
@@ -33,7 +38,7 @@ void Calc::interfata(){
     std::cout << "[1] Calculare expresie";
     std::cout << "[2] undo istoric";
     std::cout << "[3] redo istoric";
-    std::cout << "[4] exit";
+    std::cout << "[4] exit\n";
     std::cout << "Alegeti o optiune: "; std::cin >> index;
     runActions(index);
     }
@@ -91,7 +96,6 @@ void Calc::elimina_spatii_expresie(){
 		    return !(isDigit || isAllowed);
 		    }),
 	           expresie.end()) ;
-    std::cout << expresie;
 }
 std::vector<std::string> Calc::inFixToRPN(std::string expresie){
     std::stack<char> operators;
