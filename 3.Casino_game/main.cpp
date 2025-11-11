@@ -7,7 +7,7 @@
 #include <algorithm>
 class Game {
 private:
-  std::vector<int> numere_prime = {2,3,7,11,13}; 
+  std::vector<int> numere_prime = {2,3,5,7,11,13}; 
   int prize = 10000;
   int difficulty = 1;
   int current_score = 0, final_score = 5, computerChoice;
@@ -38,28 +38,32 @@ private:
 
   void patrat_perfect(int computerChoice){
     if(sqrt(computerChoice) == (int)sqrt(computerChoice))
-	    std::cout << "Nr este patrat perfect";
-    else std::cout << "Nr nu este patrat perfect";
+	    std::cout << "Nr este patrat perfect\n";
+    else std::cout << "Nr nu este patrat perfect\n";
     }
   void hint(int computerChoice) {
     std::uniform_int_distribution<int> hints(1, 5);
     int hint = hints(gen);
     switch (hint) { 
 	    case 1:
-		if(computerChoice % 2 == 0) std::cout << "Nr este par";
-		else std::cout << "Nr este impar";
+		if(computerChoice % 2 == 0) std::cout << "Nr este par \n";
+		else std::cout << "Nr este impar \n";
+		break;
 	    case 2:
-		if(computerChoice > ((int)(final_score * difficulty)/2)) std::cout << "Numarul este mai mare decat " << (int)(final_score * difficulty)/2;
-		else std::cout << "Nr este mai mic decat " << (int)(final_score * difficulty)/2;
+		if(computerChoice > ((int)(final_score * difficulty)/2)) std::cout << "Numarul este mai mare decat " << (int)(final_score * difficulty)/2 << "\n";
+		else std::cout << "Nr este mai mic sau egal decat  " << (int)(final_score * difficulty)/2 << "\n";
+		break;
 	    case 3:
 		patrat_perfect(computerChoice);
+		break;
 	    case 4:
-		if(find(numere_prime.begin(), numere_prime.end(),computerChoice) != numere_prime.end())	
-		    std::cout << "Nr este prim";
-		else std::cout << "Nr nu este prim";
+		if(find(numere_prime.begin(),  numere_prime.end(),computerChoice) != numere_prime.end())	
+		    std::cout << "Nr este prim \n";
+		else std::cout << "Nr nu este prim \n";
+		break;
 	    case 5:
-		if(computerChoice == 2) std::cout << "Nr este reprezentat de restantele lu A";
-		    
+		if(computerChoice == 3) std::cout << "Cate porecle are sk \n";
+		break;
 	}
 
   }
@@ -154,8 +158,9 @@ public:
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     while (!isGameOver()) {
       display_Score();
-      int playerChoice = getPlayerChoice();
       computerChoice = getComputerChoice();
+      hint(computerChoice);
+      int playerChoice = getPlayerChoice();
       roundResult(playerChoice, computerChoice);
     }
     endgame();
