@@ -95,6 +95,7 @@ std::vector<std::string> Calc::inFixToRPN(std::string expresie){
 
     for(int i = 0; i < (int)expresie.size();i++){
 	char c = expresie[i];
+
 	if(std::isdigit(c)){
 	 number += c;
 	 if(i == (int)expresie.size() - 1 || !std::isdigit(expresie[i+1])){
@@ -109,9 +110,23 @@ std::vector<std::string> Calc::inFixToRPN(std::string expresie){
 	    }
 	    operators.push(c);
 	}
-    }
-
+	else if( c == '(')
+	    operators.push(c);
+	else if(c == ')'){
+	    while(!operators.empty() && operators.top() != '('){
+		output.push_back(std::string(1, operators.top()));
+		operators.pop();
+	    }
+	    if(operators.empty())
+		throw std::runtime_error("Paranteze neechilibrate");
+	    operators.pop();
+	}else
+	    throw std::runtime_error(std::string("Caracter invalid") + c);
+	}
+     
     while(!operators.empty()){
+	if(operators.top() == '(')
+	    throw std::runtime_error(std::string("Paranteze neinchise"));
 	output.push_back(std::string(1, operators.top()));
 	operators.pop();
     }
