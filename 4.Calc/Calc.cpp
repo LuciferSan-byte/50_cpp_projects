@@ -85,8 +85,13 @@ void Calc::expresie_func(){
 void Calc::elimina_spatii_expresie(){
     expresie.erase(
 	std::remove_if(expresie.begin(),expresie.end(),
-		   [](char c){return c == ' ';}),
+		   [&](char c){
+		    bool isDigit = std::isdigit(static_cast<unsigned char>(c));
+		    bool isAllowed = caractere_permise.find(c) != std::string::npos;
+		    return !(isDigit || isAllowed);
+		    }),
 	           expresie.end()) ;
+    std::cout << expresie;
 }
 std::vector<std::string> Calc::inFixToRPN(std::string expresie){
     std::stack<char> operators;

@@ -6,7 +6,7 @@
 class Calc{
 private:
     std::vector<std::function<std::any()>> actions;
-
+    std::string caractere_permise = "+-*/()";
     double rezultat = 0;
     std::string expresie = "";
     std::deque<std::string> istoric_calcule_expresie;
