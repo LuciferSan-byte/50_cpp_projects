@@ -9,7 +9,8 @@ private:
     double rezultat_expresie;
     std::vector<std::string> functii_permise = {"sin","cos","tan", "ctg" };
     bool verificare_functie(const std::string & tip_functie_trig, std::string &functie_trig);
-    void verificare_functii_permise(); 
+    void verificare_functii_permise(bool &); 
+
     void evaluare_expresie_trig();
     std::optional<double> calc_functie_trig(std::string tip_functie_trig);
 public:
