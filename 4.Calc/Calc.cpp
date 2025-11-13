@@ -63,6 +63,12 @@ void Calc::expresie_func(){
 	elimina_spatii_expresie();
     }
 
+    std::set<char> set = {'+' , '-' , '*', '/'};
+    if(set.count(expresie[expresie.size() - 1])){
+	expresie.erase(expresie.size() - 1 , 1);
+    }
+    
+
     std::cout << "Rezultatul este: " << calculare_expresie();
     Adaugare_in_istoric(expresie);
     reseteaza();

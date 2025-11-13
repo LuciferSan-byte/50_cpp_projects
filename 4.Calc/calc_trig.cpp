@@ -30,6 +30,11 @@ void Calc_trig::evaluare_expresie_trig(){
 	std::cout << "Introdu o expresie valida: "; std::getline(std::cin, expresie);
 	elimina_spatii_expresie();
     }
+    
+    std::set<char> set = {'+' , '-' , '*', '/'};
+    if(set.count(expresie[expresie.size() - 1])){
+	expresie.erase(expresie.size() - 1 , 1);
+    }
 
     rezultat_expresie = calculare_expresie();
     std::string trig_istoric;
