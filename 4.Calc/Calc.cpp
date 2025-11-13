@@ -53,7 +53,6 @@ void Calc::goleste_istoric(){
 
 // prelucreaz_expresie
 void Calc::expresie_func(){
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cout << "Introdu expresia: "; std::getline(std::cin,expresie);
     elimina_spatii_expresie(); 
     std::cout << "Rezultatul este: " << calculare_expresie();

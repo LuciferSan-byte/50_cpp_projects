@@ -4,8 +4,8 @@
 Calc_trig::Calc_trig(){
     actions = { 
 	[this]() -> std::any{ expresie_func(); return{};}, 
-	[this]() -> std::any{ undo_istoric(); return{};}, 
-	[this]() -> std::any{ interfata_trig(); return {};},
+	[this]() -> std::any{ interfata_trig(); return{};}, 
+	[this]() -> std::any{ undo_istoric(); return {};},
 	[this]() -> std::any{ redo_istoric(); return{};}, 
 	[this]() -> std::any{exit(1); return{};} };
 
@@ -22,7 +22,6 @@ bool Calc_trig::verificare_functie(const std::string & tip_functie_trig, std::st
  }
 
 void Calc_trig::evaluare_expresie_trig(){
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cout << "Introdu expresie: "; std::getline(std::cin, expresie);
     elimina_spatii_expresie();
     rezultat_expresie = calculare_expresie();
@@ -51,12 +50,12 @@ std::optional<double> Calc_trig::calc_functie_trig(std::string tip_functie_trig)
 
 void Calc_trig::interfata_trig(){
     std::cout << "Introdu functia trig:"; std::getline(std::cin,tip_functie_trig);
-    
     for(std::string s : functii_permise) 
 	if(verificare_functie(tip_functie_trig, s) == true ){
 	    tip_functie_trig = s;
 	    break;
     }
+   evaluare_expresie_trig();
    auto rezultat = calc_functie_trig(tip_functie_trig);
    if(rezultat){
 	std::cout << "Rezultatul este: " <<*rezultat << '\n';
