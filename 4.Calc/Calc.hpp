@@ -3,6 +3,7 @@
 
 #include "includes.hpp"
 
+
 class Calc{
 protected: 
     std::vector<std::function<std::any()>> actions;

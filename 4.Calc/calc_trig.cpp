@@ -24,6 +24,13 @@ bool Calc_trig::verificare_functie(const std::string & tip_functie_trig, std::st
 void Calc_trig::evaluare_expresie_trig(){
     std::cout << "Introdu expresie: "; std::getline(std::cin, expresie);
     elimina_spatii_expresie();
+    
+    while(expresie.empty()){
+	std::cerr << "Expresie este goala\n";
+	std::cout << "Introdu o expresie valida: "; std::getline(std::cin, expresie);
+	elimina_spatii_expresie();
+    }
+
     rezultat_expresie = calculare_expresie();
     std::string trig_istoric;
     trig_istoric = tip_functie_trig + "(" + expresie + ")";

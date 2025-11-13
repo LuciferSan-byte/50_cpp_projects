@@ -55,6 +55,14 @@ void Calc::goleste_istoric(){
 void Calc::expresie_func(){
     std::cout << "Introdu expresia: "; std::getline(std::cin,expresie);
     elimina_spatii_expresie(); 
+    
+    while(expresie.empty()){
+	std::cerr << "Expresia e goala\n";
+	std::cout << "Introdu o expresie valida: "; std::getline(std::cin , expresie);
+	
+	elimina_spatii_expresie();
+    }
+
     std::cout << "Rezultatul este: " << calculare_expresie();
     Adaugare_in_istoric(expresie);
     reseteaza();
@@ -69,6 +77,7 @@ void Calc::elimina_spatii_expresie(){
 		    }),
 	           expresie.end()) ;
 }
+
 std::vector<std::string> Calc::inFixToRPN(std::string expresie){
     std::stack<char> operators;
     std::vector<std::string> output;
@@ -113,6 +122,7 @@ std::vector<std::string> Calc::inFixToRPN(std::string expresie){
     }
     return output;
 }
+
 double Calc::evaluateRPN(std::vector<std::string> & rpn){
     std::stack<double> s;
 

@@ -3,6 +3,7 @@
 #include "includes.hpp"
 #include "Calc.hpp"
 
+
 class Calc_trig:public Calc{
 private:
     std::string tip_functie_trig; 
