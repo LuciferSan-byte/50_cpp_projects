@@ -48,14 +48,20 @@ std::optional<double> Calc_trig::calc_functie_trig(std::string tip_functie_trig)
 
 }
 
-void Calc_trig::interfata_trig(){
-    std::cout << "Introdu functia trig:"; std::getline(std::cin,tip_functie_trig);
+void Calc_trig::verificare_functii_permise(){
     for(std::string s : functii_permise) 
 	if(verificare_functie(tip_functie_trig, s) == true ){
 	    tip_functie_trig = s;
 	    break;
     }
+}
+
+void Calc_trig::interfata_trig(){
+    std::cout << "Introdu functia trig:"; std::getline(std::cin,tip_functie_trig);
+    
+   verificare_functii_permise();
    evaluare_expresie_trig();
+
    auto rezultat = calc_functie_trig(tip_functie_trig);
    if(rezultat){
 	std::cout << "Rezultatul este: " <<*rezultat << '\n';
