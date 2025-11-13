@@ -3,19 +3,8 @@
 
 Calc::Calc(){
     
-    actions = {
-	[this]() -> std::any{ expresie_func(); return{};},
-	[this]() -> std::any{ undo_istoric(); return{};},
-	[this]() -> std::any{ redo_istoric(); return{};},
-	[this]() -> std::any{exit(1); return{};}  
-    };
 }
-void Calc::runActions(size_t index){
-    if(!isdigit(index)){
-	std::cout << "D asta ai nevoie si de calculator";
-	std::cin.clear();
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	return;}
+void Calc::runActions(int index){
     if(index < 1 || index > actions.size()){
 	std::cout << "Index invalid";
 	return;
@@ -28,22 +17,6 @@ int Calc::prioritate_semn(const char c)const{
     if(c == '*' || c == '/') return 2;
     return 0;
 }
-//afisaje 
-void Calc::interfata(){
-    int index;
-    std::cout << "\nCalculator stiintific v1.0\n";
-    while(true){
-    std::cout << "\n";
-    afisare_istoric();
-    std::cout << "[1] Calculare expresie";
-    std::cout << "[2] undo istoric";
-    std::cout << "[3] redo istoric";
-    std::cout << "[4] exit\n";
-    std::cout << "Alegeti o optiune: "; std::cin >> index;
-    runActions(index);
-    }
-}
-
 //istoric
 void Calc::Adaugare_in_istoric(const std::string &expresie){
     istoric_calcule_expresie.push_back(expresie);
@@ -81,7 +54,7 @@ void Calc::goleste_istoric(){
 // prelucreaz_expresie
 void Calc::expresie_func(){
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::cout << "Introduce-ti expresia: "; std::getline(std::cin,expresie);
+    std::cout << "Introdu expresia: "; std::getline(std::cin,expresie);
     elimina_spatii_expresie(); 
     std::cout << "Rezultatul este: " << calculare_expresie();
     Adaugare_in_istoric(expresie);
