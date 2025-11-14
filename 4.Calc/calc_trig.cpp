@@ -12,8 +12,9 @@ Calc_trig::Calc_trig(){
 }
 bool Calc_trig::verificare_functie(const std::string & tip_functie_trig, std::string &functie_trig){
    size_t j = 0;
+    
     for(char c : tip_functie_trig){
-	if(c == functie_trig[j]){
+	if(std::tolower(static_cast<unsigned char>(c)) == functie_trig[j]){
 	    j++;
 	    if(j == tip_functie_trig.size()) return true;
 	}
